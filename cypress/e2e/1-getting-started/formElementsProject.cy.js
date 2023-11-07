@@ -1,6 +1,6 @@
 describe('Project - Form Elements', () => {
 
-    it('Validate the Contact Us information',() => {
+    it('Test Case 01 - Validate the Contact Us information',() => {
         cy.visit('https://techglobal-training.com/frontend/project-1')
         const text = ['Contact Us', '2860 S River Rd Suite 480, Des Plaines, IL 60018', 'info@techglobalschool.com', '(773) 257-3010']
         cy.get('div > .mb-5').children().each(($el, index) => {
@@ -9,7 +9,10 @@ describe('Project - Form Elements', () => {
 
     }),
 
-    it('Validate the Full name input box',() => {
+    it('Test Case 02 - Validate the Full name input box',() => {
+
+        // I also included this in my automated tests below 
+        // Just to show 2 ways to do it.
         
         cy.visit('https://techglobal-training.com/frontend/project-1')
 
@@ -22,6 +25,7 @@ describe('Project - Form Elements', () => {
         cy.get('@fullNameBox').find('label').should('have.text','Full name *')
        
     }),
+
      /**
          * Navigate to https://techglobal-training.com/frontend/project-1
          *Validate the label is “Gender *”
@@ -34,7 +38,7 @@ describe('Project - Form Elements', () => {
 
        
     
-    it('Validate the Gender radio button', () => {
+    it('Test Case 03 - Validate the Gender radio button', () => {
 
             cy.visit('https://techglobal-training.com/frontend/project-1')
           
@@ -56,9 +60,15 @@ describe('Project - Form Elements', () => {
           
           })
 
-
     const testData = [
+
         {
+            description: 'Validate the Full name input box',
+            label:'Full name *',
+            placeholder:'Enter your full name',
+            required: true
+        }
+        ,{
         description: 'Validate the Address input box',
         label:'Address',
         placeholder:'Enter your address',
@@ -66,14 +76,14 @@ describe('Project - Form Elements', () => {
     },
     { 
     description: 'Validate the Email input box',
-    label:'Email*',
-    placeholder:'Enter your Email*',
+    label:'Email *',
+    placeholder:'Enter your email',
     required: true
     },
     {
         description: 'Validate the Phone input box',
         label:'Phone',
-        placeholder:'Enter your Phone number',
+        placeholder:'Enter your phone number',
         required: false
     },
     {
@@ -82,23 +92,23 @@ describe('Project - Form Elements', () => {
         placeholder:'Type your message here...',
         required: false
     },
+
 ]  
 testData.forEach((test, index) => {
 
-    it(`Test Case 0${index + 4} - ${test.description}`, () => {
+    it.only(`Test Case 0${index + 4} - ${test.description}`, () => {
         cy.visit('https://techglobal-training.com/frontend/project-1')
     
         cy.contains('.label', test.label).should('have.text', test.label)
     
-        cy.contains('.label', test.label).parent().find('input' , 'textarea').should('be.visible')
+        cy.contains('.label', test.label).parent().find('input,textarea').should('be.visible')
          .and('have.attr', 'placeholder', test.placeholder)
         .and(test.required ? 'have.attr' : 'not.have.attr', 'required')
     })
 })
 
-
   
-    it('Validate the consent checkbox',() => {
+    it('Test Case 09 - Validate the consent checkbox',() => {
         cy.visit('https://techglobal-training.com/frontend/project-1')
         /**
          * Navigate to https://techglobal-training.com/frontend/project-1
@@ -126,7 +136,7 @@ testData.forEach((test, index) => {
 
     }),
 
-    it('Validate the SUBMIT button',() => {
+    it('Test Case 10 - Validate the SUBMIT button',() => {
         cy.visit('https://techglobal-training.com/frontend/project-1')
 
         /**
@@ -142,7 +152,7 @@ testData.forEach((test, index) => {
         
     }),
 
-    it('Validate the form submission',() => {
+    it('Test Case 11 - Validate the form submission',() => {
 
         /**
          * Navigate to https://techglobal-training.com/frontend/project-1
@@ -179,48 +189,5 @@ testData.forEach((test, index) => {
 
 
     })
-
-
-    const testData1 = [
-        {
-            description: 'Validate the Address input box',
-            label: 'Address',
-            placeholder: 'Enter your address*',
-            required: false
-        },
-        {
-            description: 'Validate the Email input box',
-            label: 'Email *',
-            placeholder: 'Enter your address*',
-            required: true
-        },
-        {
-            description: 'Validate the Phone input box',
-            label: 'Phone',
-            placeholder: 'Enter your address*',
-            required: false
-        },
-        {
-            description: 'Validate the Message input box',
-            label: 'Message',
-            placeholder: 'Enter your address*',
-            required: false
-        }
-    ]
-    
-    testData.forEach((test, index) => {
-    
-        it.only(`Test Case 0${index + 4} - ${test.description}`, () => {
-            cy.visit('https://techglobal-training.com/frontend/project-1')
-        
-            cy.contains('.label', test.label).should('have.text', test.label)
-        
-            cy.contains('.label', test.label).parent().find('input, textarea').should('be.visible')
-            // .and('have.attr', 'placeholder', 'Enter your address')
-            .and(test.required ? 'have.attr' : 'not.have.attr', 'required')
-        })
-    })
-
-
 
 })
