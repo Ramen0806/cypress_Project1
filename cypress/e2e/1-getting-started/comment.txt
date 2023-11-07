@@ -1,0 +1,69 @@
+  it('Validate the Email input box',() => {
+            cy.visit('https://techglobal-training.com/frontend/project-1')
+            /**
+             *  Navigate to https://techglobal-training.com/frontend/project-1
+             *Validate that the Email input box is displayed
+             *Validate that the Email input box is required
+             *Validate that the label of the Email input box is “Email *”
+             *Validate that the placeholder of the Email input box is “Enter your emai
+             */
+            cy.get('.field:nth-child(4) .label').as('emailLabel')
+    
+            cy.get('@emailLabel').should('have.text', 'Email *')
+    
+            cy.get('@emailLabel').next().find('input').as('emailInput')
+    
+            cy.get('@emailInput').should('be.visible').and('have.attr','required')
+    
+            cy.get('@emailInput').should('have.attr', 'placeholder', 'Enter your email')
+        
+            
+        }),
+
+
+    it('Validate the Phone input box',() => {
+        cy.visit('https://techglobal-training.com/frontend/project-1')
+
+        /**
+         * Navigate to https://techglobal-training.com/frontend/project-1
+         *Validate that the Phone input box is displayed
+         *Validate that the Phone input box is not required
+         *Validate that the label of the Phone input box is “Phone”
+         *Validate that the placeholder of the Address input box is “Enter your phone number”
+         */
+
+
+        cy.get(':nth-child(5) > .label').as('phoneNumberLabel')
+
+        cy.get('@phoneNumberLabel').should('have.text', 'Phone')
+
+        cy.get(':nth-child(5) > .control > .input').as('phoneNumberInput')
+
+        cy.get('@phoneNumberInput').should('be.visible').and('not.have.attr', 'required')
+
+        cy.get('@phoneNumberInput').should('have.attr', 'placeholder', 'Enter your phone number')
+    
+        
+    }),
+
+    it('Validate the Message input box',() => {
+        cy.visit('https://techglobal-training.com/frontend/project-1')
+       
+        /**
+         * Navigate to https://techglobal-training.com/frontend/project-1
+         *Validate that the Message text area is displayed
+         *Validate that the Message text area is not required
+         *Validate that the label of the Message text area is “Message”
+         *Validate that the placeholder of the Message text area is “Type your message here…
+         */
+        cy.get(':nth-child(6) > .label').as('messageTextLabel')
+
+        cy.get('@messageTextLabel').should('have.text', 'Message')
+
+        cy.get('.textarea').as('messageTextInput')
+
+        cy.get('@messageTextInput').should('be.visible').and('not.have.attr', 'required')
+
+        cy.get('@messageTextInput').should('have.attr', 'placeholder', 'Type your message here...')
+
+    }),
